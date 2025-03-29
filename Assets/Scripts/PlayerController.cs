@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -23,9 +24,6 @@ public class PlayerController : MonoBehaviour {
 	
 
 	void FixedUpdate () {
-
-
-
         anim.SetFloat("VerticalSpeed", Input.GetAxis("Vertical"));
 
         anim.SetFloat("HorizontalSpeed", Input.GetAxis("Horizontal"));
@@ -45,5 +43,18 @@ public class PlayerController : MonoBehaviour {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
 
         body.transform.position = transform.position + movement * Time.deltaTime * moveSpeed;
+    }
+    
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ReloadCurrentScene();
+        }
+    }
+
+    void ReloadCurrentScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
